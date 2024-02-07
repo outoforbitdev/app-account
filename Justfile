@@ -23,6 +23,8 @@ lint:
 
 run: clean
     docker build -t app-account .
+    docker run -d -p 1798:44446 -v ./app-account/ClientApp/src:/app/ClientApp/src --name app-account app-account
+    docker container exec app-account wget localhost:5149
 
 clean : stop
 	-docker rmi app-account
