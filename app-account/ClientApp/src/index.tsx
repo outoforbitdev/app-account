@@ -8,7 +8,8 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 // @ts-ignore
 import reportWebVitals from "./reportWebVitals";
 
-const baseUrl = document.getElementsByTagName("base")[0].getAttribute("href") ?? undefined;
+const baseUrl =
+  document.getElementsByTagName("base")[0].getAttribute("href") ?? undefined;
 const rootElement = document.getElementById("root");
 
 ReactDOM.render(

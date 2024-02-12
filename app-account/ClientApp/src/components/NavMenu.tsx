@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 import "./NavMenu.css";
 
 type NavMenuState = {
-  collapsed: boolean,
-}
+  collapsed: boolean;
+};
 
 export class NavMenu extends Component<{}, NavMenuState> {
   static displayName = NavMenu.name;

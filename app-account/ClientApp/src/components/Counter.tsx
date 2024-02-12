@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 type CounterState = {
-  currentCount: number,
-}
+  currentCount: number;
+};
 
 export class Counter extends Component<{}, CounterState> {
   static displayName = Counter.name;

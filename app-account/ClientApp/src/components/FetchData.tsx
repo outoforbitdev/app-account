@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 
 type Forecast = {
-  date: string,
-  temperatureC: string,
-  temperatureF: string,
-  summary: string,
-}
+  date: string;
+  temperatureC: string;
+  temperatureF: string;
+  summary: string;
+};
 
 type FetchDataState = {
-  loading: boolean,
-  forecasts: Forecast[],
-}
+  loading: boolean;
+  forecasts: Forecast[];
+};
 export class FetchData extends Component<{}, FetchDataState> {
   static displayName = FetchData.name;
 
