@@ -11,10 +11,14 @@ import {
 import { Link } from "react-router-dom";
 import "./NavMenu.css";
 
-export class NavMenu extends Component {
+type NavMenuState = {
+  collapsed: boolean,
+}
+
+export class NavMenu extends Component<{}, NavMenuState> {
   static displayName = NavMenu.name;
 
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);

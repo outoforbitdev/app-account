@@ -1,9 +1,20 @@
 import React, { Component } from "react";
 
-export class FetchData extends Component {
+type Forecast = {
+  date: string,
+  temperatureC: string,
+  temperatureF: string,
+  summary: string,
+}
+
+type FetchDataState = {
+  loading: boolean,
+  forecasts: Forecast[],
+}
+export class FetchData extends Component<{}, FetchDataState> {
   static displayName = FetchData.name;
 
-  constructor(props) {
+  constructor(props: {}) {
     super(props);
     this.state = { forecasts: [], loading: true };
   }
@@ -12,7 +23,7 @@ export class FetchData extends Component {
     this.populateWeatherData();
   }
 
-  static renderForecastsTable(forecasts) {
+  static renderForecastsTable(forecasts: Forecast[]) {
     return (
       <table className="table table-striped" aria-labelledby="tabelLabel">
         <thead>
