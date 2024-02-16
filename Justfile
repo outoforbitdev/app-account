@@ -7,7 +7,7 @@ install:
     echo "yarn commitlint --edit \$1 --config .config/commitlint.config.js" > .husky/commit-msg
     echo "just lint" > .husky/pre-commit
     mkdir -p .config
-    echo "module.exports = { extends: ['@commitlint/config-conventional'] };" > .config/commitlint.config.js
+    echo "module.exports = { extends: [\"@commitlint/config-conventional\"] };" > .config/commitlint.config.js
 
 rebuild-staging:
     git fetch
