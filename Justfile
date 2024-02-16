@@ -27,7 +27,7 @@ run: clean
     # Build image
     docker build -t {{app_name}} ./app-account
     # Run image
-    docker run -d -p 1798:44446 -v ./{{app_name}}/ClientApp/src:/app/ClientApp/src --name {{app_name}} {{app_name}}
+    docker run -d -p 1798:44446 -v ./{{app_name}}/ClientApp:/app/ClientApp --name {{app_name}} {{app_name}}
     # Wait for the server to start
     docker container exec {{app_name}} wget http://localhost:5149 &> /dev/null
     # Wait for the SPA development server to start
