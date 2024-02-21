@@ -1,0 +1,22 @@
+div.login-page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+}
+
+div.login-container {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    /* border: 1px solid black; */
+}
+
+.login-input {
+    text-align: left;
+    width: 300px;
+    flex-grow: 1;
+    margin-bottom: 10px;
+}

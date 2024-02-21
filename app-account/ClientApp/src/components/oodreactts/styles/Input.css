@@ -1,0 +1,33 @@
+﻿body {
+}
+
+/*input.OODCoreComponentInput {
+    width: 135px;
+}*/
+
+div.OODCoreComponentInputDiv {
+    display: flex;
+    flex-direction: column;
+}
+
+span.OODCoreComponentInputSpan {
+    border-style: solid;
+    border-width: 1px;
+    padding: 4px;
+    display: flex;
+}
+span.OODCoreComponentInputSpan:focus-within {
+    border-color: #0000EE;
+    border-width: 2px;
+    padding: 3px;
+}
+
+.OODCoreComponentInputSpan input {
+    border: none;
+    -webkit-appearance: none;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    outline: none;
+    box-shadow: none;
+    flex-grow: 1;
+}

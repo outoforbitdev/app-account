@@ -1,0 +1,25 @@
+﻿:root {
+    --background-color-primary: white;
+    --text-color-primary: black;
+    --background-color-inverted: black;
+    --text-color-inverted: white;
+}
+
+[data-theme="OODCoreStyleThemeLight"] {
+    --background-color-primary: white;
+    --text-color-primary: black;
+    --background-color-inverted: black;
+    --text-color-inverted: white;
+}
+
+[data-theme="OODCoreStyleThemeDark"] {
+    --background-color-primary: black;
+    --text-color-primary: white;
+    --background-color-inverted: white;
+    --text-color-inverted: black;
+}
+
+body {
+    background-color: var(--background-color-primary);
+    color: var(--text-color-primary)
+}

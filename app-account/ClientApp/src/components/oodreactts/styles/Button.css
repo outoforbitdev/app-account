@@ -1,0 +1,12 @@
+﻿body {
+}
+
+button.OODCoreComponentButton {
+    border: solid 1px;
+    -webkit-appearance: none;
+}
+
+button.OODCoreComponentButtonSeamless {
+    border: none;
+    background: none;
+}
