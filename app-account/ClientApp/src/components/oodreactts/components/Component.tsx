@@ -1,9 +1,12 @@
 import React from "react";
 import {isNullOrEmpty} from "../../oodts/core";
 
-export interface IComponentProps {
-    children?: React.ReactNode;
+export interface IChildlessComponentProps{
     className?: string;
+}
+
+export interface IComponentProps extends IChildlessComponentProps {
+    children?: React.ReactNode;
     
 }
 

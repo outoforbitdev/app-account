@@ -21,7 +21,7 @@ export function Button(props: IButtonProps) {
     }
 
     return (
-        <button onClick={props.onClick} className={getClassName(className, props.classNames)} style={style}>
+        <button type="button" onClick={props.onClick} className={getClassName(className, props.className)} style={style}>
             {props.children}
         </button>
     );

@@ -1,12 +1,12 @@
-﻿body {
-}
-
-button.OODCoreComponentButton {
+﻿.OODCoreComponentButton {
     border: solid 1px;
     -webkit-appearance: none;
+    appearance: none;
+    text-align: center;
 }
 
-button.OODCoreComponentButtonSeamless {
+.OODCoreComponentButtonSeamless {
     border: none;
     background: none;
+    text-align: center;
 }

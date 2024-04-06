@@ -4,6 +4,7 @@ import { Route } from "react-router";
 import "./custom.css";
 import { Login } from "./components/Login";
 import { CreateAccount } from "./components/CreateAccount";
+import { Account } from "./components/Account";
 
 export default class App extends Component {
   static displayName = App.name;
@@ -13,6 +14,7 @@ export default class App extends Component {
       <Fragment>
         <Route exact path="/" component={Login} />
         <Route exact path="/register" component={CreateAccount} />
+        <Route exact path="/account" component={Account} />
       </Fragment>
     );
   }

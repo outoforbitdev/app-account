@@ -1,9 +1,12 @@
 import React, { useState } from "react";
 import { IComponent, IComponentProps } from "./oodreactts/components/Component";
-import { TextField } from "./oodreactts/components/InputField/TextField";
-import { PasswordField } from "./oodreactts/components/InputField/PasswordField";
+import { TextInput } from "./oodreactts/components/Inputs/TextInput";
+import { PasswordInput } from "./oodreactts/components/Inputs/PasswordInput";
 import { Button } from "./oodreactts/components/Core/Button";
 import "../styles/Login.css"
+import { SubmitInput } from "./oodreactts/components/Inputs/SubmitInput";
+import { Form } from "./oodreactts/components/Inputs/Form";
+import { Link } from "./oodreactts/components/Core/Link";
 
 interface ILoginProps extends IComponentProps {}
 
@@ -12,12 +15,15 @@ export const Login: IComponent<ILoginProps> = (props: ILoginProps) => {
     const [password, setPassword] = useState("");
     return(
         <div className="login-page">
-            <div className="login-container">
+            <Form 
+                className="login-container"
+                onSubmit={() => submitLogin(username, password)}>
                 Out of Orbit Development<br />
-                <TextField label="Username" onValueChange={setUsername} breakLabel className="login-input" /> <br />
-                <PasswordField label="Password" showable onValueChange={setPassword} breakLabel className="login-input" /><br />
-                <Button onClick={() => submitLogin(username, password)}>Login</Button>
-            </div>
+                <TextInput label="Username" onValueChange={setUsername} breakLabel className="login-input" /> <br />
+                <PasswordInput label="Password" showable onValueChange={setPassword} breakLabel className="login-input" /><br />
+                <SubmitInput value="Login" />
+                <Link href="register">Create Account</Link>
+            </Form>
         </div>
     )
 }

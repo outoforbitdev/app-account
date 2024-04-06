@@ -14,7 +14,7 @@ export function ButtonLink(props: IButtonLinkProps) {
             seamless={props.seamless}
             width={props.width}
             onClick={() => (window.location.href = props.link)}
-            classNames={props.classNames}
+            className={props.className}
         >
             {props.children}
         </Button>

@@ -4,5 +4,6 @@ FROM outoforbitdev/dotnet-reactapp:1.0.0
   RUN dotnet dev-certs https
   COPY . /app
   RUN rm -rf /app/ClientApp
+  RUN chmod +x /app/docker_run.sh
 
-ENTRYPOINT [ "dotnet", "run" ]
+ENTRYPOINT [ "/app/docker_run.sh" ]

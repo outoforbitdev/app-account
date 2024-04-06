@@ -2,15 +2,14 @@ import * as React from "react";
 import { useState } from "react";
 import "../../styles/Input.css";
 import { Button } from "../Core/Button";
-import { defaultValidator, IInputProps, InputSpan, onBlur, onKeyDown, onValueChange } from "./InputField";
+import { defaultValidator, IInputProps, InputSpan, onKeyDown, onValueChange } from "./InputSpan";
 
-interface IPasswordFieldProps extends IInputProps<string> {
+interface IPasswordInputProps extends IInputProps<string> {
     showable?: boolean;
 }
 
-export function PasswordField(props: IPasswordFieldProps): JSX.Element {
-    const onQuickValidate = props.onQuickValidate ? props.onQuickValidate : defaultValidator;
-    const onFullValidate = props.onFullValidate ? props.onFullValidate : defaultValidator;
+export function PasswordInput(props: IPasswordInputProps): JSX.Element {
+    const checkValidity = props.checkValidity ? props.checkValidity : defaultValidator;
     const onChange = props.onValueChange ? props.onValueChange : (_val: string) => {};
     const defaultValue = props.defaultValue ? props.defaultValue : "";
 
@@ -18,18 +17,22 @@ export function PasswordField(props: IPasswordFieldProps): JSX.Element {
     const [visible, setVisible] = useState(false);
 
     return (
-        <InputSpan label={props.label} breakLabel={props.breakLabel} className={props.className} >
+        <InputSpan 
+            breakLabel={props.breakLabel} 
+            className={props.className} 
+            label={props.label}
+        >
             <input
                 type={visible ? "text" : "password"}
                 inputMode={"text"}
-                value={props.defaultValue}
-                onBlur={onBlur(onQuickValidate, onFullValidate)}
-                onChange={onValueChange(onQuickValidate, onChange, setValue)}
+                defaultValue={props.defaultValue}
+                onChange={onValueChange(checkValidity, onChange, setValue)}
                 onKeyDown={onKeyDown(setValue, defaultValue)}
                 size={props.size}
             />
             {props.showable ? (
                 <Button seamless onClick={toggleVisible(setVisible, visible)} width={"40px"}>
+                    {/* @TODO replace this with icon */}
                     {visible ? "Hide" : "Show"}
                 </Button>
             ) : null}
