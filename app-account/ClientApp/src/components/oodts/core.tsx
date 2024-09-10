@@ -1,5 +1,8 @@
 export function isNullOrEmpty(val: any) {
-    if (val === null){
+    if (val === null) {
+        return true;
+    }
+    if (val === undefined) {
         return true;
     }
     if (val === "") {

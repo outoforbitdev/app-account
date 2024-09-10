@@ -1,0 +1,20 @@
+.settings-table td {
+    vertical-align: top;
+}
+
+div.page {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+div.content {
+    display: flex;
+    padding-top: 5px;
+    flex-grow: 1;
+}
+
+div.children {
+    flex-grow: 1;
+    margin-left: 5px;
+}

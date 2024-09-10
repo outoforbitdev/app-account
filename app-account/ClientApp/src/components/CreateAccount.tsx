@@ -7,6 +7,7 @@ import "../styles/Login.css"
 import { SubmitInput } from "./oodreactts/components/Inputs/SubmitInput";
 import { Form } from "./oodreactts/components/Inputs/Form";
 import { Link } from "./oodreactts/components/Core/Link";
+import { EmailInput } from "./oodreactts/components/Inputs/EmailInput";
 
 interface ILoginProps extends IComponentProps {}
 
@@ -19,28 +20,25 @@ export const CreateAccount: IComponent<ILoginProps> = (props: ILoginProps) => {
             className="login-page"
             onSubmit={() => submitAccountCreation(username, password)}
         >
+            Out of Orbit Development
             <Form className="login-container">
-                Out of Orbit Development<br />
-                <TextInput 
-                    breakLabel 
-                    className="login-input" 
-                    label="Username" 
-                    maxWidth="100vw"
-                    onValueChange={setUsername} 
-                    width="300px"
-                /> <br />
-                <PasswordInput label="Password" showable onValueChange={setPassword} breakLabel className="login-input" /><br />
-                <PasswordInput 
-                    label= "Confirm Password" 
+                <label>Email</label>
+                <EmailInput
+                    // className="login-input"
+                    onValueChange={setUsername}
+                />
+                <label>Password</label>
+                <PasswordInput showable onValueChange={setPassword} className="login-input" />
+                <label>Confirm Password</label>
+                <PasswordInput
                     showable 
                     onValueChange={setConfirmPassword} 
-                    checkValidity={() => validatePasswordConfirmation(password, confirmPassword)}
-                    breakLabel 
+                    checkValidity={() => validatePasswordConfirmation(password, confirmPassword)} 
                     className="login-input" 
-                /> <br />
+                />
                 <SubmitInput value="Create Account" />
-                <Link href="/">Login</Link>
             </Form>
+            <Link href="/login">Login</Link>
         </div>
     )
 }

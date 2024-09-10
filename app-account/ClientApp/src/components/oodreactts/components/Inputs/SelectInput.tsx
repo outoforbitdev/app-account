@@ -1,20 +1,21 @@
 import * as React from "react";
 import { useState } from "react";
-// import { Compose } from '../Library/Compose';
 import "../../styles/Input.css";
+import { Button } from "../Core/Button";
 import { defaultValidator, IInputProps, InputSpan, onKeyDown, onValueChange } from "./InputSpan";
 import { ColorScheme } from "../Component";
 
-interface ITextInputProps extends IInputProps<string> {
-    clearable?: boolean;
+interface ISelectInputProps extends IInputProps<string> {
+    children?: React.DetailedHTMLProps<React.OptionHTMLAttributes<HTMLOptionElement>, HTMLOptionElement>
 }
 
-export function TextInput(props: ITextInputProps): JSX.Element {
+export function SelectInput(props: ISelectInputProps): JSX.Element {
     const checkValidity = props.checkValidity ? props.checkValidity : defaultValidator;
     const onChange = props.onValueChange ? props.onValueChange : (_val: string) => {};
     const defaultValue = props.defaultValue ? props.defaultValue : "";
 
     const [value, setValue] = useState(defaultValue);
+    const [visible, setVisible] = useState(false);
 
     return (
         <InputSpan
@@ -22,10 +23,9 @@ export function TextInput(props: ITextInputProps): JSX.Element {
             colorScheme={props.colorScheme ?? ColorScheme.Primary}
         >
             <input
-                type={"text"}
+                type={visible ? "text" : "password"}
                 inputMode={"text"}
-                defaultValue={defaultValue}
-                className={"OODCoreComponentTextField"}
+                defaultValue={props.defaultValue}
                 onChange={onValueChange(checkValidity, onChange, setValue)}
                 onKeyDown={onKeyDown(setValue, defaultValue)}
             />

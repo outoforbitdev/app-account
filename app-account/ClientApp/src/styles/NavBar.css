@@ -1,0 +1,6 @@
+.nav-bar {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color-secondary);
+    padding: 10px;
+}

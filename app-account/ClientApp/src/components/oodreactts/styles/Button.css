@@ -1,12 +1,38 @@
-﻿.OODCoreComponentButton {
-    border: solid 1px;
+﻿.OODCoreComponentButtonShared {
     -webkit-appearance: none;
     appearance: none;
     text-align: center;
+    overflow: hidden;
+    /* background-color: var(--background-color-secondary);
+    color: var(--text-color-secondary); */
+}
+
+.OODCoreComponentButtonShared:hover {
+    /* background-color: var(--background-color-primary) */
+}
+
+.OODCoreComponentButtonShared:focus {
+    /* background-color: var(--background-color-secondary) */
 }
 
 .OODCoreComponentButtonSeamless {
     border: none;
-    background: none;
-    text-align: center;
+    padding: 2px;
+}
+
+.OODCoreComponentButton:focus-within {
+    border-color: var(--focus-color);
+    border-width: 2px;
+    padding: 0px;
+}
+
+.OODCoreComponentButton {
+    padding: 1px;
+    border: solid 1px;
+}
+
+.OODCoreComponentButton:focus-within {
+    border-color: var(--focus-color);
+    border-width: 2px;
+    padding: 0px;
 }

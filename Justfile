@@ -21,7 +21,7 @@ rebuild-staging:
     git push origin staging
 
 lint:
-    docker run -v $(pwd):/polylint/app polylint
+    docker run -v $(pwd):/polylint/app outoforbitdev/polylint:0.1.0
 
 run: clean
     # Build image

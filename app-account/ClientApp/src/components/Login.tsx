@@ -7,23 +7,27 @@ import "../styles/Login.css"
 import { SubmitInput } from "./oodreactts/components/Inputs/SubmitInput";
 import { Form } from "./oodreactts/components/Inputs/Form";
 import { Link } from "./oodreactts/components/Core/Link";
+import { EmailInput } from "./oodreactts/components/Inputs/EmailInput";
 
 interface ILoginProps extends IComponentProps {}
 
 export const Login: IComponent<ILoginProps> = (props: ILoginProps) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [valid, setValid] = useState(false);
     return(
         <div className="login-page">
+        Out of Orbit Development
             <Form 
                 className="login-container"
                 onSubmit={() => submitLogin(username, password)}>
-                Out of Orbit Development<br />
-                <TextInput label="Username" onValueChange={setUsername} breakLabel className="login-input" /> <br />
-                <PasswordInput label="Password" showable onValueChange={setPassword} breakLabel className="login-input" /><br />
-                <SubmitInput value="Login" />
-                <Link href="register">Create Account</Link>
+                <label>Email</label>
+                <TextInput onValueChange={setUsername} className="login-input" />
+                <label>Password</label>
+                <PasswordInput showable onValueChange={setPassword} className="login-input" />
+                <SubmitInput value="Login" disabled={!valid}/>
             </Form>
+            <Link href="register">Create Account</Link>
         </div>
     )
 }
@@ -31,4 +35,5 @@ export const Login: IComponent<ILoginProps> = (props: ILoginProps) => {
 const submitLogin = (username: string, password: string) => {
     console.log(username);
     console.log(password);
+    document.documentElement.setAttribute('data-theme', 'OODCoreStyleThemeLight');
 }

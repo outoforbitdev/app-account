@@ -1,11 +1,12 @@
 import * as React from "react";
-import { IComponentProps, getClassName } from "../Component";
+import { ColorScheme, IComponentProps, getClassName, getColorSchemeClassName } from "../Component";
 import "../../styles/Button.css";
 
 interface IButtonProps extends IComponentProps {
     onClick?: () => void;
     seamless?: boolean;
     width?: string;
+    transparent?: boolean;
 }
 
 interface IComponentStyle {
@@ -13,8 +14,17 @@ interface IComponentStyle {
 }
 
 export function Button(props: IButtonProps) {
-    let className = "OODCoreComponentButton";
-    className = props.seamless ? "OODCoreComponentButtonSeamless " + className : className;
+    const defaultColorScheme = props.transparent ? ColorScheme.Primary : ColorScheme.Secondary;
+    const sharedClassName = getColorSchemeClassName(
+        "OODCoreComponentButtonShared", 
+        props.colorScheme ?? defaultColorScheme, 
+        props.seamless ? false : true,
+        props.transparent ? false : true,
+    );
+    const seamlessClassName = " OODCoreComponentButtonSeamless";
+    const borderedClassName = " OODCoreComponentButton";
+    const className = sharedClassName + (props.seamless ? seamlessClassName : borderedClassName);
+    
     const style: IComponentStyle = {};
     if (props.width) {
         style.width = props.width;

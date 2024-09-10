@@ -3,6 +3,7 @@ import { useState } from "react";
 import "../../styles/Input.css";
 import { Button } from "../Core/Button";
 import { defaultValidator, IInputProps, InputSpan, onKeyDown, onValueChange } from "./InputSpan";
+import { ColorScheme } from "../Component";
 
 interface IPasswordInputProps extends IInputProps<string> {
     showable?: boolean;
@@ -16,11 +17,34 @@ export function PasswordInput(props: IPasswordInputProps): JSX.Element {
     const [value, setValue] = useState(defaultValue);
     const [visible, setVisible] = useState(false);
 
+    const showIcon = <svg color="currentColor" fill="currentColor" width="30px" height="30px">
+        <defs>
+            <mask id="center-eye">
+                <rect x="0" y="0" height="30" width="30" fill="white"/>
+                <circle cx="15" cy="15" r="3" fill="black"/>
+            </mask>
+        </defs>
+        {/* <path d="M 5 15 C 10 20, 20 20, 25 15" stroke="currentColor" fill="currentColor" mask="url(#center-eye)"/>
+        <path d="M 5 15 C 10 10, 20 10, 25 15" stroke="currentColor" fill="currentColor" mask="url(#center-eye)"/> */}
+        <ellipse cx="15" cy="15" rx="10" ry="5" mask="url(#center-eye)"/>
+    </svg>
+    const hideIcon = <svg color="currentColor" fill="currentColor" width="30px" height="30px">
+        <defs>
+            <mask id="center-eye">
+                <rect x="0" y="0" height="30" width="30" fill="white"/>
+                <circle cx="15" cy="15" r="3" fill="black"/>
+            </mask>
+        </defs>
+        {/* <path d="M 5 15 C 10 20, 20 20, 25 15" stroke="currentColor" fill="currentColor" mask="url(#center-eye)"/>
+        <path d="M 5 15 C 10 10, 20 10, 25 15" stroke="currentColor" fill="currentColor" mask="url(#center-eye)"/> */}
+        <ellipse cx="15" cy="15" rx="10" ry="5" mask="url(#center-eye)"/>
+        <line x1="5" x2="25" y1="25" y2="5" stroke="currentColor"/>
+    </svg>
+
     return (
-        <InputSpan 
-            breakLabel={props.breakLabel} 
-            className={props.className} 
-            label={props.label}
+        <InputSpan
+            className={props.className}
+            colorScheme={props.colorScheme ?? ColorScheme.Primary}
         >
             <input
                 type={visible ? "text" : "password"}
@@ -28,12 +52,11 @@ export function PasswordInput(props: IPasswordInputProps): JSX.Element {
                 defaultValue={props.defaultValue}
                 onChange={onValueChange(checkValidity, onChange, setValue)}
                 onKeyDown={onKeyDown(setValue, defaultValue)}
-                size={props.size}
             />
             {props.showable ? (
-                <Button seamless onClick={toggleVisible(setVisible, visible)} width={"40px"}>
+                <Button seamless onClick={toggleVisible(setVisible, visible)} transparent>
                     {/* @TODO replace this with icon */}
-                    {visible ? "Hide" : "Show"}
+                    {visible ? hideIcon : showIcon}
                 </Button>
             ) : null}
         </InputSpan>

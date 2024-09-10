@@ -2,40 +2,52 @@ import * as React from "react";
 import { ChangeEvent, FocusEvent, KeyboardEvent } from "react";
 import "../../styles/Input.css";
 import "../../styles/Themes.css";
-import { IChildlessComponentProps, IComponentProps, getClassName } from "../Component";
+import { ColorScheme, IChildlessComponentProps, IComponentProps, getClassName, getColorSchemeClassName } from "../Component";
 
 interface IInputValidatorResult {
     valid: boolean;
     error?: string;
 }
+export type ISetValidatorResult = React.Dispatch<React.SetStateAction<{valid: boolean, error?: string}>>
 type InputValidator<T> = (val: T) => IInputValidatorResult;
 type InputChange<T> = (val: T) => void;
 
 export interface IInputProps<T> extends IChildlessComponentProps {
     defaultValue?: T;
-    label?: string;
-    breakLabel?: boolean;
     onValueChange?: InputChange<T>;
     checkValidity?: InputValidator<T>;
-    size?: number;
+    disabled?: boolean;
 }
 
 interface IInputSpanProps extends IComponentProps {
-    label?: string
-    breakLabel?: boolean;
     width?: string;
     maxWidth?: string;
+    validatorResult?: IInputValidatorResult;
+    colorScheme: ColorScheme;
 }
 
 export function InputSpan(props: IInputSpanProps): JSX.Element {
-    const label = <label>{props.label}</label>
+    const isValid = props.validatorResult ? (props.validatorResult.valid ? true : false) : true;
+    const inputInvalidColorScheme = isValid ? "" : getColorSchemeClassName("", ColorScheme.Error, true);
+    const spanInvalidColorScheme = isValid ? "" : getColorSchemeClassName("", ColorScheme.Error);
+
+    const colorSchemeClassName = getColorSchemeClassName(
+        "OODCoreComponentInputSpan",
+        props.colorScheme,
+        true
+    );
+
+    const validitySpan = 
+        <span className={getClassName("OODCoreComponentInputValidationSpan", spanInvalidColorScheme)}>
+            { isValid ? null : props.validatorResult?.error }
+        </span>
+
     return(
         <div className={getClassName("OODCoreComponentInputDiv", props.className)} >
-            {props.label ? <label>{props.label}</label> : null}
-            {props.label && props.breakLabel ? <br /> : null}
-            <span className={"OODCoreComponentInputSpan"}>
+            <div className={getClassName(colorSchemeClassName, inputInvalidColorScheme)}>
                 {props.children}
-            </span>
+            </div>
+            {props.validatorResult ? validitySpan : null}
         </div>
     );
 }
