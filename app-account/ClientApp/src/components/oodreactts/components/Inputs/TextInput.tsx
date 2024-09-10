@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 // import { Compose } from '../Library/Compose';
 import "../../styles/Input.css";
-import { defaultValidator, IInputProps, InputSpan, onKeyDown, onValueChange } from "./InputSpan";
+import { createOnChange, IInputProps, InputSpan } from "./InputSpan";
 import { ColorScheme } from "../Component";
 
 interface ITextInputProps extends IInputProps<string> {
@@ -10,11 +10,8 @@ interface ITextInputProps extends IInputProps<string> {
 }
 
 export function TextInput(props: ITextInputProps): JSX.Element {
-    const checkValidity = props.checkValidity ? props.checkValidity : defaultValidator;
-    const onChange = props.onValueChange ? props.onValueChange : (_val: string) => {};
+    const onChange = createOnChange(props.onValueChange ? props.onValueChange : (_val: string) => {});
     const defaultValue = props.defaultValue ? props.defaultValue : "";
-
-    const [value, setValue] = useState(defaultValue);
 
     return (
         <InputSpan
@@ -26,8 +23,7 @@ export function TextInput(props: ITextInputProps): JSX.Element {
                 inputMode={"text"}
                 defaultValue={defaultValue}
                 className={"OODCoreComponentTextField"}
-                onChange={onValueChange(checkValidity, onChange, setValue)}
-                onKeyDown={onKeyDown(setValue, defaultValue)}
+                onChange={onChange}
             />
         </InputSpan>
     );

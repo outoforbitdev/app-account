@@ -2,50 +2,45 @@ import * as React from "react";
 import { useState } from "react";
 // import { Compose } from '../Library/Compose';
 import "../../styles/Input.css";
-import { defaultValidator, IInputProps, InputSpan, ISetValidatorResult, onKeyDown, onValueChange } from "./InputSpan";
+import { createOnChange, IInputProps, InputSpan } from "./InputSpan";
 import { ColorScheme } from "../Component";
 
 interface IEmailInputProps extends IInputProps<string> {
     clearable?: boolean;
+    setIsValid?: (valid: boolean) => void;
 }
 
 export function EmailInput(props: IEmailInputProps): JSX.Element {
-    const checkValidity = defaultValidator;
-    const onChange = props.onValueChange ? props.onValueChange : (_val: string) => {};
+    const setIsValid = props.setIsValid ?? ((val: boolean) => {return;});
+    const onValueChange = props.onValueChange ?? ((val: string) => {return;});
+    const onChange = createOnChange(checkEmailValidity(setIsValid, onValueChange));
     const defaultValue = props.defaultValue ? props.defaultValue : "";
-
-    const [value, setValue] = useState(defaultValue);
-    const [validatorResult, setValidatorResult] = useState({valid: true})
 
     return (
         <InputSpan
             className={props.className}
-            validatorResult={validatorResult}
             colorScheme={props.colorScheme ?? ColorScheme.Primary}
+            error={props.error}
         >
             <input
                 type={"text"}
                 inputMode={"text"}
                 defaultValue={defaultValue}
                 className={"OODCoreComponentTextField"}
-                onChange={onValueChange(checkValidity, onChange, setValue)}
-                onKeyDown={onKeyDown(setValue, defaultValue)}
-                onBlur={() => checkEmailValidity(value, setValidatorResult)}
+                onChange={onChange}
             />
         </InputSpan>
     );
 }
 
-function checkEmailValidity(val: string, setValidatorResult: ISetValidatorResult) {
-    console.log("validator: " + val);
-    if (/^[a-zA-Z0-9.]+@[a-zA-Z0-9].[a-z]$/.test(val)) {
-        setValidatorResult({
-            valid: true
-        });
+function checkEmailValidity(setIsValid: (valid: boolean) => void, onChange: (value: string) => void) {
+    return (val: string) => {
+        if (/^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-z]+$/.test(val)) {
+            setIsValid(true);
+            onChange(val);
+            return;
+        }
+        setIsValid(false);
+        onChange(val);
     }
-    console.log("invalid");
-    setValidatorResult({
-        valid: false,
-        error: "Please enter a valid email address.",
-    });
 } 

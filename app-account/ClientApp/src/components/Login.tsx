@@ -14,7 +14,8 @@ interface ILoginProps extends IComponentProps {}
 export const Login: IComponent<ILoginProps> = (props: ILoginProps) => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [valid, setValid] = useState(false);
+    const [valid, setValid] = useState(true);
+    
     return(
         <div className="login-page">
         Out of Orbit Development

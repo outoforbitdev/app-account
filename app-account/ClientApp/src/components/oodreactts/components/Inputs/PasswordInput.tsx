@@ -2,7 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import "../../styles/Input.css";
 import { Button } from "../Core/Button";
-import { defaultValidator, IInputProps, InputSpan, onKeyDown, onValueChange } from "./InputSpan";
+import { createOnChange, IInputProps, InputSpan } from "./InputSpan";
 import { ColorScheme } from "../Component";
 
 interface IPasswordInputProps extends IInputProps<string> {
@@ -10,11 +10,9 @@ interface IPasswordInputProps extends IInputProps<string> {
 }
 
 export function PasswordInput(props: IPasswordInputProps): JSX.Element {
-    const checkValidity = props.checkValidity ? props.checkValidity : defaultValidator;
-    const onChange = props.onValueChange ? props.onValueChange : (_val: string) => {};
+    const onChange = createOnChange(props.onValueChange ? props.onValueChange : (_val: string) => {});
     const defaultValue = props.defaultValue ? props.defaultValue : "";
-
-    const [value, setValue] = useState(defaultValue);
+    
     const [visible, setVisible] = useState(false);
 
     const showIcon = <svg color="currentColor" fill="currentColor" width="30px" height="30px">
@@ -45,13 +43,13 @@ export function PasswordInput(props: IPasswordInputProps): JSX.Element {
         <InputSpan
             className={props.className}
             colorScheme={props.colorScheme ?? ColorScheme.Primary}
+            error={props.error}
         >
             <input
                 type={visible ? "text" : "password"}
                 inputMode={"text"}
                 defaultValue={props.defaultValue}
-                onChange={onValueChange(checkValidity, onChange, setValue)}
-                onKeyDown={onKeyDown(setValue, defaultValue)}
+                onChange={onChange}
             />
             {props.showable ? (
                 <Button seamless onClick={toggleVisible(setVisible, visible)} transparent>
